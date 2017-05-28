@@ -32,9 +32,9 @@ def main_loop():
     if sys.version_info < (3, 5, 3):
         raise RuntimeError('Python >= 3.5.3 is required to run ElectrumX')
 
-    if os.geteuid() == 0:
-        raise RuntimeError('DO NOT RUN AS ROOT! Create an unpriveleged user '
-                           'account and use that')
+    #if os.geteuid() == 0:
+        #raise RuntimeError('DO NOT RUN AS ROOT! Create an unpriveleged user '
+                          # 'account and use that')
 
     loop = asyncio.get_event_loop()
     # loop.set_debug(True)
@@ -58,8 +58,11 @@ def main_loop():
 
     # Install signal handlers
     for signame in ('SIGINT', 'SIGTERM'):
-        loop.add_signal_handler(getattr(signal, signame),
-                                partial(on_signal, signame))
+        try:
+            loop.add_signal_handler(getattr(signal, signame),
+                                    partial(on_signal, signame))
+        except NotImplementedError:
+            pass
 
     # Install exception handler
     loop.set_exception_handler(on_exception)
