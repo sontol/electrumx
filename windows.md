@@ -1,4 +1,5 @@
-##Running your Bitcoin node
+Running your Bitcoin node
+==========================
 
 You can't prune your node. This is the reason why so many people don't like blocksize increase. Running pruned node is simply not an option for them.
 
@@ -12,7 +13,8 @@ rpcport=18333
 
 You can either put these options with - character in front of them without newline if you are running from command line or alternatively you can save them in %APPDATA%\Bitcoin folder as bitcoin.conf
 
-#Download and install everything. I used powershell but you can just simply open the link in browser and save them yourselves
+Download and install everything. I used powershell but you can just simply open the link in browser and save them yourselves
+==========================
 
 First get a copy of python 3.6.1
 
@@ -48,7 +50,8 @@ Then install pylru
 
 py -3.6 -m pip install pylru
 
-#Build leveldb.lib and leveldb.dll
+Build leveldb.lib and leveldb.dll
+==========================
 
 I found these from nodejs module level. It's the only fork that I can get it to compile. It requires nw.lib and libuv. I've included them inside for your convenience. However if you don't want to use them you can get them from nwjs directly. Just follow the procedure listed in https://github.com/nwjs/nw-gyp. Normally it will be saved inside %USERPROFILE%\.nw-gyp folder
 Header is in deps\uv and library is in x64 folder
@@ -71,7 +74,8 @@ I think you can use the IDE as well, I've never tried them though.
 
 py -3.6 -m pip install --global-option=build_ext --global-option="-IC:\Users\User\node_modules\level\node_modules\leveldown\deps\leveldb\leveldb-1.18.0\include" --global-option="-LC:\Users\User\node_modules\level\node_modules\leveldown\deps\leveldb\Release" plyvel
 
-#Get electrumx
+Get electrumx
+==========================
 
 I created my own branch of electrumx. Basically I made 3 modifications: remove maximum file handle check because Windows has pretty big limit, remove access level check so you need to make sure on your own that you don't run with Administrator privilege, and finally remove keyboard interrupt check although CTRL+C and CTRL+BREAK will still work
 
