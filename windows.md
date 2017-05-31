@@ -1,4 +1,4 @@
-#Running your Bitcoin node
+##Running your Bitcoin node
 
 You can't prune your node. This is the reason why so many people don't like blocksize increase. Running pruned node is simply not an option for them.
 
