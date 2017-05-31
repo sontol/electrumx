@@ -13,8 +13,10 @@ rpcport=18333
 
 You can either put these options with - character in front of them without newline if you are running from command line or alternatively you can save them in %APPDATA%\Bitcoin folder as bitcoin.conf
 
-Download and install everything. I used powershell but you can just simply open the link in browser and save them yourselves
+Download and install everything. 
 ==========================
+
+I used powershell but you can just simply open the link in browser and save them yourselves
 
 First get a copy of python 3.6.1
 
