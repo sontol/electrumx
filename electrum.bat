@@ -4,5 +4,5 @@ SET DAEMON_URL=http://user:password@127.0.0.1:18332/
 SET SSL_CERTFILE=C:\Users\User\Downloads\openssl-1.0.2k-x64_86-win64\server.crt
 SET SSL_KEYFILE=C:\Users\User\Downloads\openssl-1.0.2k-x64_86-win64\server.key
 SET COIN=Bitcoin
-SET NET=testnet
+SET NET=mainnet
 py -3.6 electrumx_server.py
