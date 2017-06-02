@@ -22,6 +22,8 @@ Download and install everything.
 
 I used powershell but you can just simply open the link in browser and save them yourselves
 
+Open up a command prompt
+
 First get a copy of python 3.6.1
 
 powershell
@@ -73,7 +75,7 @@ git clone https://github.com/sontol/leveldb
 
 Go to snappy directory
 
-msbuild
+msbuild /t:Rebuild /p:Configuration=Release /p:PlatformToolset=v140
 
 Go to leveldb directory
 
