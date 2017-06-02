@@ -6,9 +6,13 @@ You can't prune your node. This is the reason why so many people don't like bloc
 You need to run bitcoin node, either bitcoin-qt or bitcoind with the following option
 
 txindex=1
+
 server=1
+
 rpcuser=username
+
 rpcpassword=password
+
 rpcport=18333
 
 You can either put these options with - character in front of them without newline if you are running from command line or alternatively you can save them in %APPDATA%\Bitcoin folder as bitcoin.conf
@@ -21,6 +25,7 @@ I used powershell but you can just simply open the link in browser and save them
 First get a copy of python 3.6.1
 
 powershell
+
 wget https://www.python.org/ftp/python/3.6.1/python-3.6.1-amd64.exe -Outfile python-3.6.1-amd64.exe 
 
 And then install or just doubleclick on it, make sure to check put python in path
@@ -36,7 +41,11 @@ Install them, if it asks you whether to place it in PATH answer yes
 Get visual c++ 2015 (it has to be that version, it is the only version that works with python 3.6)
 
 wget http://go.microsoft.com/fwlink/?LinkId=691126 -Outfile visualcppbuildtool_full.exe
+
 ./visualcppbuildtool_full -Wait
+
+wget https://indy.fulgan.com/SSL/openssl-1.0.2k-x64_86-win64.zip -Outfile openssl-1.0.2k-x64_86-win64.zip
+
 
 At this stage you will need to open a command prompt if you haven't already opened them
 
@@ -63,18 +72,49 @@ Open up Visual C++ 2015 Native Build Tools Command Prompt
 git clone https://github.com/sontol/leveldb
 
 Go to snappy directory
+
 msbuild
 
 Go to leveldb directory
+
 msbuild /t:Rebuild /p:Configuration=Release /p:PlatformToolset=v140 leveldb.vcxproj
 
 You can then find the .dll and .lib in the Release folder
 
 I think you can use the IDE as well, I've never tried them though.
 
-#Build plyvel, replace the include and library directory with the appropriate directory for leveldb include and leveldb.lib
+Build plyvel, replace the include and library directory with the appropriate directory for leveldb include and leveldb.lib
+=================================
 
 py -3.6 -m pip install --global-option=build_ext --global-option="-IC:\Users\User\node_modules\level\node_modules\leveldown\deps\leveldb\leveldb-1.18.0\include" --global-option="-LC:\Users\User\node_modules\level\node_modules\leveldown\deps\leveldb\Release" plyvel
+
+Get OpenSSL and create SSL_CERTFILE and SSL_KEYFILE
+=========================
+
+Unzip the OpenSSL file
+
+Use the following command
+
+openssl genrsa -des3 -passout pass:x -out server.pass.key 2048
+
+openssl rsa -passin pass:x -in server.pass.key -out server.key
+
+del server.pass.key
+
+openssl req -new -key server.key -out server.csr
+
+Country Name (2 letter code) [AU]:US
+
+State or Province Name (full name) [Some-State]:California
+
+Common Name (eg, YOUR name) []: electrum-server.tld
+
+A challenge password []: (leave blank, just press enter)
+
+openssl x509 -req -days 1825 -in server.csr -signkey server.key -out server.crt
+
+At the end you will have server.key which is your SSL_KEYFILE and server.crt which is your SSL_CERTFILE
+
 
 Get electrumx
 ==========================
@@ -84,12 +124,19 @@ I created my own branch of electrumx. Basically I made 3 modifications: remove m
 git clone https://github.com/sontol/electrumx -b windows
 
 Go to your electrum folder
+
 Edit electrumx.bat
 
 Make sure that your leveldb.dll is inside the PATH, edits them if necessary
+
 Put SSL_CERTFILE and SSL_KEYFILE where you generate them with openssl
+
 Change DB_DIRECTORY into where you want to save the electrum database
+
 Make sure that DAEMON_URL is the same as your bitcoind/bitcoin-qt setting with username, password, and port equals to what you save in bitcoin.conf
+
 Save it
+
 Run electrumx.bat
-If you want to end running press CTRL+C or CTRL+BREAK
+
+If you want to end the run press CTRL+C or CTRL+BREAK
