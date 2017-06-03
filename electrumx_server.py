@@ -45,6 +45,9 @@ def main_loop():
                         .format(signame))
         controller.initiate_shutdown()
 
+    def sighandler(sigint,frame):
+        on_signal('SIGINT')
+
     def on_exception(loop, context):
         '''Suppress spurious messages it appears we cannot control.'''
         message = context.get('message')
@@ -62,7 +65,7 @@ def main_loop():
             loop.add_signal_handler(getattr(signal, signame),
                                     partial(on_signal, signame))
         except NotImplementedError:
-            pass
+            signal.signal(signal.SIGINT,sighandler)
 
     # Install exception handler
     loop.set_exception_handler(on_exception)
