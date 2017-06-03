@@ -121,7 +121,7 @@ At the end you will have server.key which is your SSL_KEYFILE and server.crt whi
 Get electrumx
 ==========================
 
-I created my own branch of electrumx. Basically I made 3 modifications: remove maximum file handle check because Windows has pretty big limit, remove access level check so you need to make sure on your own that you don't run with Administrator privilege, and finally remove keyboard interrupt check although CTRL+C and CTRL+BREAK will still work
+I created my own branch of electrumx. Basically I made 3 modifications: remove maximum file handle check because Windows has pretty big limit, remove access level check so you need to make sure on your own that you don't run with Administrator privilege, and finally remove keyboard interrupt check although CTRL+C will still work
 
 git clone https://github.com/sontol/electrumx -b windows
 
