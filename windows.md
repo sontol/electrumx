@@ -141,4 +141,4 @@ Save it
 
 Run electrumx.bat
 
-If you want to end the run press CTRL+C or CTRL+BREAK
+If you want to end the run press CTRL+C
